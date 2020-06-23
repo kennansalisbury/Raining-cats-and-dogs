@@ -2,12 +2,13 @@
 const express = require('express')
 const layouts = require('express-ejs-layouts')
 const app = express()
-const methodOverride = require('method-override')
+let methodOverride = require('method-override')
 
 app.set('view engine', 'ejs')
 app.use('/', express.static('static'))
 app.use(express.urlencoded({extended: false}))
 app.use(methodOverride('_method'))
+app.use(layouts)
 
 /*------------- ROUTES/CONTROLLERS --------------*/
 //Controllers:
@@ -16,8 +17,7 @@ app.use('/dogs', require('./controllers/dogs'))
 
 //Home: GET - /
 app.get('/', (req,res) => {
-    // res.render('home')
-    res.send('home')
+    res.render('home')
 })
 
 
