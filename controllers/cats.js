@@ -53,6 +53,7 @@ router.get('/edit/:id', (req, res) => {
 
 //Update: PUT - /cats/:id
 router.put('/:id', (req, res) => {
+    
     res.send('edit cat')
 })
 
