@@ -1,1 +1,6 @@
-<div>Show All Dogs</div>
+<h1>Show All Dogs</h1>
+<div>
+    <% dogs.forEach(dog => { %>
+        <h2><%= dog.name %></h2>
+    <% }) %>
+</div>

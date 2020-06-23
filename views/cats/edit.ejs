@@ -1,1 +1,8 @@
-<div>Edit cat</div>
+<h1>Edit <%=cat.name%></h1>
+
+<form action=<%=`cats/${index}/?_method=PUT"`%> method="POST">
+    Name: <input name="name" type="text" value=<%= cat.name %>/>
+    Image URL: <input name="image" type="text" value=<%= cat.image %>/>
+    Famous For: <input name="famousFor" type="text" value=<%= cat.famousFor %>/>
+    <input type="submit" value="add"/>
+</form>

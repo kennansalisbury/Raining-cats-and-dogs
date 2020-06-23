@@ -3,7 +3,10 @@ const fs = require('fs')
 
 //Index: GET - /dogs
 router.get('/', (req, res) => {
-    res.render('dogs/index')
+    let dogs = fs.readFileSync('./dogs.json')
+    let dogData = JSON.parse(dogs)
+    
+    res.render('dogs/index', {dogs: dogData})
 })
 
 //Create: GET - /dogs

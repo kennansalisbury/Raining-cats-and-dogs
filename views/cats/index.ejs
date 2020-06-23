@@ -1,1 +1,8 @@
-<div>Show all cats</div>
+<h1>Show all cats</h1>
+<div>
+    <ul>
+        <% cats.forEach((cat, i) => { %>
+            <li><a href=<%=`cats/${i}`%>><%= cat.name %></a></li>
+        <% }) %>
+    </ul>
+</div>

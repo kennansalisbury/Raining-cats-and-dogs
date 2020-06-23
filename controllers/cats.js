@@ -4,7 +4,10 @@ const fs = require('fs')
 
 //Index: GET - /cats
 router.get('/', (req, res) => {
-    res.render('cats/index')
+    let cats = fs.readFileSync('./cats.json')
+    let catData = JSON.parse(cats)
+    
+    res.render('cats/index', {cats: catData})
 })
 
 //Create: GET - /cats
@@ -14,17 +17,38 @@ router.get('/new', (req, res) => {
 
 //Show/Details: GET - /cats/:id
 router.get('/:id', (req, res) => {
-    res.render('cats/show')
+    let cats = fs.readFileSync('./cats.json')
+    cats = JSON.parse(cats)
+
+    index = req.params.id
+
+    res.render('cats/show', {cat: cats[index], index: index})
 })
 
 //Add: POST - /cats
 router.post('/', (req, res) => {
-    res.send('create new cat')
+    let cats = fs.readFileSync('./cats.json')
+    cats = JSON.parse(cats)
+
+    //add item to cats array
+    cats.push(req.body)
+
+    //save cats to the data json file
+    fs.writeFileSync('./cats.json', JSON.stringify(cats))
+
+    //redirect to cat just created
+    res.redirect('/cats/' + (cats.length-1))
+    // res.send(req.body)
 })
 
 //Edit: GET - /cats/:id
-router.get('/:id', (req, res) => {
-    res.render('cats/edit')
+router.get('/edit/:id', (req, res) => {
+    let cats = fs.readFileSync('./cats.json')
+    cats = JSON.parse(cats)
+
+    index = req.params.id
+    
+    res.render('cats/edit', {cat: cats[index], index: index})
 })
 
 //Update: PUT - /cats/:id
